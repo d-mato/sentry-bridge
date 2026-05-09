@@ -1,4 +1,5 @@
 allowBuilds:
   esbuild: true
-  workerd: true
+  lefthook: true
   sharp: false
+  workerd: true
