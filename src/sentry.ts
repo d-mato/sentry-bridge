@@ -1,18 +1,12 @@
 import { Hono } from "hono";
+import { formatDiscord } from "./formatters/discord";
+import { formatSlack } from "./formatters/slack";
 import { getProject } from "./store";
+import type { SentryEventAlertPayload } from "./types";
 
 type Bindings = {
   PROJECTS: KVNamespace;
   FALLBACK_DESTINATION_URL?: string;
-};
-
-type SentryEventAlertPayload = {
-  action?: string;
-  data?: {
-    event?: {
-      project?: number;
-    };
-  };
 };
 
 const sentry = new Hono<{ Bindings: Bindings }>();
@@ -35,11 +29,11 @@ sentry.post("/", async (c) => {
     return c.text("ignored", 200);
   }
 
-  const rawProject = payload.data?.event?.project;
-  if (typeof rawProject !== "number") {
+  const event = payload.data?.event;
+  if (!event || typeof event.project !== "number") {
     return c.text("missing data.event.project", 400);
   }
-  const projectId = String(rawProject);
+  const projectId = String(event.project);
 
   const project = await getProject(c.env.PROJECTS, projectId);
   let destinationUrl: string;
@@ -57,10 +51,38 @@ sentry.post("/", async (c) => {
     destinationUrl = fallback;
   }
 
-  console.log("resolved destination", {
+  const host = new URL(destinationUrl).hostname;
+  let body: unknown;
+  if (host === "hooks.slack.com") {
+    body = formatSlack(event);
+  } else if (host === "discord.com") {
+    body = formatDiscord(event);
+  } else {
+    console.error("unsupported destination host", { projectId, host });
+    return c.text("unsupported destination host", 500);
+  }
+
+  const res = await fetch(destinationUrl, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => "");
+    console.error("destination failed", {
+      projectId,
+      host,
+      status: res.status,
+      body: errText.slice(0, 500),
+    });
+    return c.text("destination failed", 502);
+  }
+
+  console.log("delivered", {
     projectId,
     matched: project !== null,
-    host: new URL(destinationUrl).hostname,
+    host,
   });
   return c.text("ok");
 });
