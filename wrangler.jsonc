@@ -2,5 +2,14 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sentry-bridge",
   "main": "src/index.ts",
-  "compatibility_date": "2026-05-01"
+  "compatibility_date": "2026-05-01",
+  "kv_namespaces": [
+    {
+      "binding": "PROJECTS",
+      "id": "929d6b9191be40459c28f42742911c2c"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
 }
