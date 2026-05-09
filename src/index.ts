@@ -5,6 +5,8 @@ import sentry from "./sentry";
 type Bindings = {
   PROJECTS: KVNamespace;
   ADMIN_TOKEN: string;
+  SENTRY_CLIENT_SECRET: string;
+  FALLBACK_DESTINATION_URL?: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();

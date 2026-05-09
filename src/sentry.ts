@@ -3,20 +3,31 @@ import { formatDiscord } from "./formatters/discord";
 import { formatSlack } from "./formatters/slack";
 import { getProject } from "./store";
 import type { SentryEventAlertPayload } from "./types";
+import { verifySentrySignature } from "./verify";
 
 type Bindings = {
   PROJECTS: KVNamespace;
+  SENTRY_CLIENT_SECRET: string;
   FALLBACK_DESTINATION_URL?: string;
 };
 
 const sentry = new Hono<{ Bindings: Bindings }>();
 
 sentry.post("/", async (c) => {
+  const rawBody = await c.req.text();
+  const signature = c.req.header("sentry-hook-signature");
+  const verified = await verifySentrySignature(
+    rawBody,
+    signature,
+    c.env.SENTRY_CLIENT_SECRET,
+  );
+  if (!verified) {
+    return c.text("invalid signature", 401);
+  }
+
   if (c.req.header("sentry-hook-resource") !== "event_alert") {
     return c.text("ignored", 200);
   }
-
-  const rawBody = await c.req.text();
 
   let payload: SentryEventAlertPayload;
   try {
