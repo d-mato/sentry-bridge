@@ -29,6 +29,8 @@ sentry.post("/", async (c) => {
     return c.text("ignored", 200);
   }
 
+  console.log("sentry webhook payload", { rawBody });
+
   let payload: SentryEventAlertPayload;
   try {
     payload = JSON.parse(rawBody) as SentryEventAlertPayload;

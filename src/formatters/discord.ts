@@ -23,15 +23,22 @@ export function formatDiscord(
 ): RESTPostAPIWebhookWithTokenJSONBody {
   const title = clamp(pickTitle(event), 256);
   const env = tagValue(event.tags, "environment");
+  const subtitle = event.occurrence?.subtitle ?? event.culprit;
 
   const embed: APIEmbed = {
     title,
+    description: subtitle ? clamp(subtitle, 4096) : undefined,
     url: event.web_url,
     color: levelToColor(event.level),
     fields: [
       { name: "Env", value: env ?? "n/a", inline: true },
       { name: "Level", value: event.level ?? "n/a", inline: true },
       { name: "Platform", value: event.platform ?? "n/a", inline: true },
+      {
+        name: "Transaction",
+        value: event.transaction ?? "n/a",
+        inline: false,
+      },
       { name: "Release", value: event.release ?? "n/a", inline: false },
     ],
     timestamp: new Date().toISOString(),

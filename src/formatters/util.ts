@@ -12,6 +12,8 @@ export function tagValue(
 }
 
 export function pickTitle(event: SentryEvent): string {
+  const occurrenceTitle = event.occurrence?.issueTitle?.trim();
+  if (occurrenceTitle) return occurrenceTitle;
   const t = event.title?.trim();
   if (t && t !== "<untitled>") return t;
   const md = event.metadata;
