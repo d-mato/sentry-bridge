@@ -2,4 +2,24 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: ["config:recommended", "security:minimumReleaseAgeNpm"],
   postUpdateOptions: ["pnpmDedupe"],
+  packageRules: [
+    {
+      matchPackageNames: ["wrangler", "@cloudflare/**"],
+      groupName: "cloudflare",
+    },
+    {
+      matchPackageNames: ["hono", "@hono/**"],
+      groupName: "hono",
+    },
+    {
+      // Lockstep peer dep on vitest. Must stay below the cloudflare rule so the
+      // last-match-wins precedence pulls @cloudflare/vitest-pool-workers here.
+      matchPackageNames: ["vitest", "@vitest/**", "@cloudflare/vitest-pool-workers"],
+      groupName: "vitest",
+    },
+    {
+      matchManagers: ["github-actions"],
+      groupName: "github-actions",
+    },
+  ],
 }
