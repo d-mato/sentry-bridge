@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
+    "@cloudflare/vitest-pool-workers": "^0.16.10",
     "@cloudflare/workers-types": "^4.20260508.1",
     "@slack/types": "^2.21.1",
     "discord-api-types": "^0.38.47",
