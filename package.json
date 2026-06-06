@@ -24,7 +24,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.15",
+    "@biomejs/biome": "2.4.16",
     "@cloudflare/vitest-pool-workers": "^0.16.10",
     "@cloudflare/workers-types": "^4.20260508.1",
     "@slack/types": "^2.21.1",
