@@ -16,7 +16,7 @@
   "license": "ISC",
   "packageManager": "pnpm@11.0.4",
   "volta": {
-    "node": "26.1.0"
+    "node": "26.5.0"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.7.6",
