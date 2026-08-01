@@ -29,7 +29,7 @@
     "@cloudflare/workers-types": "^5.0.0",
     "@slack/types": "^3.0.0",
     "discord-api-types": "^0.38.47",
-    "lefthook": "2.1.9",
+    "lefthook": "2.1.10",
     "typescript": "^6.0.3",
     "vitest": "^4.1.7",
     "wrangler": "^4.90.0"
