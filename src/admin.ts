@@ -27,7 +27,9 @@ const projectInput = z.object({
 const admin = new Hono<{ Bindings: Bindings }>();
 
 admin.use("*", async (c, next) => {
-  const middleware = bearerAuth({ token: c.env.ADMIN_TOKEN });
+  const middleware = bearerAuth<{ Bindings: Bindings }>({
+    token: c.env.ADMIN_TOKEN,
+  });
   return middleware(c, next);
 });
 
