@@ -14,7 +14,7 @@
     "check": "biome check --write"
   },
   "license": "ISC",
-  "packageManager": "pnpm@11.0.4",
+  "packageManager": "pnpm@11.20.0",
   "volta": {
     "node": "26.5.1"
   },
