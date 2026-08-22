@@ -14,7 +14,7 @@
     "check": "biome check --write"
   },
   "license": "ISC",
-  "packageManager": "pnpm@11.21.0",
+  "packageManager": "pnpm@11.22.0",
   "dependencies": {
     "@hono/zod-validator": "^0.9.0",
     "hono": "^4.12.18",
