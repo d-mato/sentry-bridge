@@ -10,6 +10,15 @@ Sentry's Developer plan has no Slack or Discord integration, but Internal Integr
 
 The contract is specified by the tests rather than by this file: `pnpm test`.
 
+## Deploy
+
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/d-mato/sentry-bridge)
+
+The button clones this repository, provisions the `PROJECTS` KV namespace, and prompts for the secrets listed in [`.dev.vars.example`](.dev.vars.example). Two steps stay manual afterwards:
+
+1. Create a Sentry [internal integration](https://docs.sentry.io/organization/integrations/integration-platform/internal-integration/) with its webhook URL set to `https://<worker>/sentry`, and set the integration's client secret as `SENTRY_CLIENT_SECRET`.
+2. Add a mapping for each Sentry project you want routed — see [Operations](#operations).
+
 ## Operations
 
 ```sh
@@ -32,7 +41,7 @@ There is no update endpoint. To change a destination, DELETE then POST.
 ## Development
 
 ```sh
-pnpm dev        # reads secrets from .dev.vars
+pnpm dev        # reads secrets from .dev.vars, see .dev.vars.example
 pnpm test
 pnpm typecheck
 pnpm check

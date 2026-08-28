@@ -1,0 +1,8 @@
+# Client secret of the Sentry internal integration. Used to verify webhook signatures.
+SENTRY_CLIENT_SECRET=
+
+# Bearer token for /admin/*. Leaving it unset rejects every admin request.
+ADMIN_TOKEN=
+
+# Optional. Destination webhook for projects with no mapping.
+FALLBACK_DESTINATION_URL=
