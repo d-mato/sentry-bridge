@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@hono/zod-validator':
         specifier: ^0.9.0
-        version: 0.9.0(hono@4.13.5)(zod@4.4.3)
+        version: 0.9.1(hono@4.13.7)(zod@4.4.3)
       hono:
         specifier: ^4.12.18
-        version: 4.13.5
+        version: 4.13.7
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -360,8 +360,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@hono/zod-validator@0.9.0':
-    resolution: {integrity: sha512-n0ZSXmCiHVIp4Y5wlOOyZCeTd/rsawA/qW1cipB8QOYKZ9N8Tk0nZUZCXho9cu374AN4JpDNKioNKBJ/W+LBug==}
+  '@hono/zod-validator@0.9.1':
+    resolution: {integrity: sha512-iiv6w0qrIc0arfvCtUqBWsvl4fXjzaTcQcCJTTtCnkawF9HHGE+KjEl0ox3gQJ6rKZEgE3mLExlQCF72M+mNuw==}
     peerDependencies:
       hono: '>=4.11.2'
       zod: ^3.25.0 || ^4.0.0
@@ -890,8 +890,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  hono@4.13.5:
-    resolution: {integrity: sha512-O6+/eCYRkzzzy0rPWwKLiGBR1nFuUPZynnwjxN1MBA62NNqbT0wQEzQyK2gSO5yDIDB336sXQleAhOHrzlYyKw==}
+  hono@4.13.7:
+    resolution: {integrity: sha512-c8/gF9ac8Y78/agExVocyLevgR+JlpNB444Py0FSX8pJoPdYUfUzRcXtYEYGwt6l19qIlVZPN5Mfsw9jFShmQQ==}
     engines: {node: '>=16.9.0'}
 
   kleur@4.1.5:
@@ -1465,9 +1465,9 @@ snapshots:
   '@esbuild/win32-x64@0.28.1':
     optional: true
 
-  '@hono/zod-validator@0.9.0(hono@4.13.5)(zod@4.4.3)':
+  '@hono/zod-validator@0.9.1(hono@4.13.7)(zod@4.4.3)':
     dependencies:
-      hono: 4.13.5
+      hono: 4.13.7
       zod: 4.4.3
 
   '@img/colour@1.1.0': {}
@@ -1842,7 +1842,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  hono@4.13.5: {}
+  hono@4.13.7: {}
 
   kleur@4.1.5: {}
 
